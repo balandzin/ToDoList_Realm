@@ -26,12 +26,6 @@ final class StorageManager {
         realm.objects(T.self)
     }
     
-    func save(_ taskLists: [TaskList]) {
-        write {
-            realm.add(taskLists)
-        }
-    }
-    
     func edit<T>(_ taskList: T, newValue: String, newNote: String? = nil) {
             write {
                 if let objectToEdit = taskList as? TaskList {
@@ -70,6 +64,12 @@ final class StorageManager {
             let taskList = TaskList(value: [taskList])
             realm.add(taskList)
             completion(taskList)
+        }
+    }
+    
+    func save(_ taskLists: [TaskList]) {
+        write {
+            realm.add(taskLists)
         }
     }
 
